@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>红岩狼队 · 红岩虎队 · 比赛日历一键导入</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: #f5f5f7;
+            color: #1c1c1e;
+            line-height: 1.6;
+            padding: 0 16px 40px;
+        }
+        .container { max-width: 480px; margin: 0 auto; }
+
+        .header {
+            text-align: center;
+            padding: 32px 0 24px;
+        }
+        .header h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1c1c1e;
+            margin-bottom: 6px;
+        }
+        .header p {
+            font-size: 14px;
+            color: #8e8e93;
+        }
+
+        .team-section {
+            background: #fff;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+        .team-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .team-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        .icon-wolf { background: #fef3c7; }
+        .icon-tiger { background: #fee2e2; }
+        .team-title {
+            flex: 1;
+        }
+        .team-title h3 {
+            font-size: 17px;
+            font-weight: 600;
+            color: #1c1c1e;
+        }
+        .team-title span {
+            font-size: 13px;
+            color: #8e8e93;
+        }
+
+        .match-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 10px 0;
+            border-bottom: 1px solid #f2f2f7;
+        }
+        .match-item:last-child { border-bottom: none; }
+        .match-time-col {
+            min-width: 90px;
+            padding-right: 12px;
+        }
+        .match-date { font-size: 12px; color: #8e8e93; }
+        .match-time { font-size: 15px; font-weight: 600; color: #1c1c1e; font-variant-numeric: tabular-nums; }
+        .match-detail { flex: 1; }
+        .match-opponent {
+            font-size: 15px;
+            color: #1c1c1e;
+            font-weight: 500;
+        }
+        .match-opponent .vs { color: #8e8e93; font-weight: 400; }
+        .match-meta {
+            font-size: 13px;
+            color: #8e8e93;
+            margin-top: 2px;
+        }
+        .badge {
+            display: inline-block;
+            font-size: 11px;
+            padding: 1px 6px;
+            border-radius: 4px;
+            margin-left: 4px;
+            font-weight: 500;
+        }
+        .badge-home { background: #d1fae5; color: #059669; }
+        .badge-away { background: #f3f4f6; color: #6b7280; }
+
+        .import-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            margin-top: 16px;
+            background: #007aff;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .import-btn:active { opacity: 0.85; }
+
+        .tips {
+            background: #fff;
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+        .tips h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1c1c1e;
+            margin-bottom: 12px;
+        }
+        .tips ol {
+            padding-left: 18px;
+            font-size: 14px;
+            color: #3a3a3c;
+        }
+        .tips li {
+            margin-bottom: 8px;
+            line-height: 1.7;
+        }
+        .tips .highlight {
+            background: #fff3cd;
+            padding: 0 4px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 13px;
+            color: #c7c7cc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>比赛日历一键导入</h1>
+            <p>2026年8月18日 — 8月20日 · 提前1小时提醒</p>
+        </div>
+
+        <div class="team-section">
+            <div class="team-header">
+                <div class="team-icon icon-wolf">&#x1F43A;</div>
+                <div class="team-title">
+                    <h3>红岩狼队</h3>
+                    <span>共 5 场 · 8月18日–8月20日</span>
+                </div>
+            </div>
+
+            <div class="match-item">
+                <div class="match-time-col">
+                    <div class="match-date">8月18日</div>
+                    <div class="match-time">18:00</div>
+                </div>
+                <div class="match-detail">
+                    <div class="match-opponent">
+                        客场 <span class="vs">vs</span> 华师黄队
+                        <span class="badge badge-away">客场</span>
+                    </div>
+                    <div class="match-meta">场地2</div>
+                </div>
+            </div>
+            <div class="match-item">
+                <div class="match-time-col">
+                    <div class="match-date">8月18日</div>
+                    <div class="match-time">20:40</div>
+                </div>
+                <div class="match-detail">
+                    <div class="match-opponent">
+                        主场 <span class="vs">vs</span> 山洞小学
+                        <span class="badge badge-home">主场</span>
+                    </div>
+                    <div class="match-meta">场地2</div>
+                </div>
+            </div>
+            <div class="match-item">
+                <div class="match-time-col">
+                    <div class="match-date">8月19日</div>
+                    <div class="match-time">19:20</div>
+                </div>
+                <div class="match-detail">
+                    <div class="match-opponent">
+                        主场 <span class="vs">vs</span> 华师绿队
+                        <span class="badge badge-home">主场</span>
+                    </div>
+                    <div class="match-meta">场地1</div>
+                </div>
+            </div>
+            <div class="match-item">
+                <div class="match-time-col">
+                    <div class="match-date">8月20日</div>
+                    <div class="match-time">18:00</div>
+                </div>
+                <div class="match-detail">
+                    <div class="match-opponent">
+                        客场 <span class="vs">vs</span> 沙磁黄
+                        <span class="badge badge-away">客场</span>
+                    </div>
+                    <div class="match-meta">场地2</div>
+                </div>
+            </div>
+            <div class="match-item">
+                <div class="match-time-col">
+                    <div class="match-date">8月20日</div>
+                    <div class="match-time">20:40</div>
+                </div>
+                <div class="match-detail">
+                    <div class="match-opponent">
+                        客场 <span class="vs">vs</span> 红岩虎队
+                        <span class="badge badge-away">客场</span>
+                    </div>
+                    <div class="match-meta">场地1</div>
+                </div>
+            </div>
+
+            <a href="data:text/calendar;charset=utf-8;base64,QkVHSU46VkNBTEVOREFSDQpWRVJTSU9OOjIuMA0KUFJPRElEOi0vL+i1m+eoi+ihqC8v57qi5bKp54u86ZifLy9DTg0KQ0FMU0NBTEU6R1JFR09SSUFODQpNRVRIT0Q6UFVCTElTSA0KQkVHSU46VkVWRU5UDQpVSUQ6bWF0Y2gt57qi5bKp54u86ZifLTIwMjYwODE4LTBAc2NoZWR1bGUubG9jYWwNCkRUU1RBTVA6MjAyNjA4MTdUMjIwMDAwDQpEVFNUQVJUO1RaSUQ9QXNpYS9TaGFuZ2hhaToyMDI2MDgxOFQxODAwMDANCkRURU5EO1RaSUQ9QXNpYS9TaGFuZ2hhaToyMDI2MDgxOFQxODU1MDANClNVTU1BUlk657qi5bKp54u86ZifIOWuouWcuiB2cyDljY7luIjpu4TpmJ8NCkxPQ0FUSU9OOuWcuuWcsDINCkRFU0NSSVBUSU9OOuavlOi1m++8mue6ouWyqeeLvOmYnyB2cyDljY7luIjpu4TpmJ9cbuWcuuWcsO+8muWcuuWcsDJcbuS4u+WuouWcuu+8muWuouWcug0KQkVHSU46VkFMQVJNDQpBQ1RJT046RElTUExBWQ0KREVTQ1JJUFRJT0465q+U6LWb5Y2z5bCG5byA5aeL77yM6K+35o+Q5YmN5YeG5aSHDQpUUklHR0VSOi1QVDFIDQpFTkQ6VkFMQVJNDQpFTkQ6VkVWRU5UDQpCRUdJTjpWRVZFTlQNClVJRDptYXRjaC3nuqLlsqnni7zpmJ8tMjAyNjA4MTgtMUBzY2hlZHVsZS5sb2NhbA0KRFRTVEFNUDoyMDI2MDgxN1QyMjAwMDANCkRUU1RBUlQ7VFpJRD1Bc2lhL1NoYW5naGFpOjIwMjYwODE4VDIwNDAwMA0KRFRFTkQ7VFpJRD1Bc2lhL1NoYW5naGFpOjIwMjYwODE4VDIxMzUwMA0KU1VNTUFSWTrnuqLlsqnni7zpmJ8g5Li75Zy6IHZzIOWxsea0nuWwj+Wtpg0KTE9DQVRJT0465Zy65ZywMg0KREVTQ1JJUFRJT0465q+U6LWb77ya57qi5bKp54u86ZifIHZzIOWxsea0nuWwj+Wtplxu5Zy65Zyw77ya5Zy65ZywMlxu5Li75a6i5Zy677ya5Li75Zy6DQpCRUdJTjpWQUxBUk0NCkFDVElPTjpESVNQTEFZDQpERVNDUklQVElPTjrmr5TotZvljbPlsIblvIDlp4vvvIzor7fmj5DliY3lh4blpIcNClRSSUdHRVI6LVBUMUgNCkVORDpWQUxBUk0NCkVORDpWRVZFTlQNCkJFR0lOOlZFVkVOVA0KVUlEOm1hdGNoLee6ouWyqeeLvOmYny0yMDI2MDgxOS0yQHNjaGVkdWxlLmxvY2FsDQpEVFNUQU1QOjIwMjYwODE3VDIyMDAwMA0KRFRTVEFSVDtUWklEPUFzaWEvU2hhbmdoYWk6MjAyNjA4MTlUMTkyMDAwDQpEVEVORDtUWklEPUFzaWEvU2hhbmdoYWk6MjAyNjA4MTlUMjAxNTAwDQpTVU1NQVJZOue6ouWyqeeLvOmYnyDkuLvlnLogdnMg5Y2O5biI57u/6ZifDQpMT0NBVElPTjrlnLrlnLAxDQpERVNDUklQVElPTjrmr5TotZvvvJrnuqLlsqnni7zpmJ8gdnMg5Y2O5biI57u/6ZifXG7lnLrlnLDvvJrlnLrlnLAxXG7kuLvlrqLlnLrvvJrkuLvlnLoNCkJFR0lOOlZBTEFSTQ0KQUNUSU9OOkRJU1BMQVkNCkRFU0NSSVBUSU9OOuavlOi1m+WNs+WwhuW8gOWni++8jOivt+aPkOWJjeWHhuWkhw0KVFJJR0dFUjotUFQxSA0KRU5EOlZBTEFSTQ0KRU5EOlZFVkVOVA0KQkVHSU46VkVWRU5UDQpVSUQ6bWF0Y2gt57qi5bKp54u86ZifLTIwMjYwODIwLTNAc2NoZWR1bGUubG9jYWwNCkRUU1RBTVA6MjAyNjA4MTdUMjIwMDAwDQpEVFNUQVJUO1RaSUQ9QXNpYS9TaGFuZ2hhaToyMDI2MDgyMFQxODAwMDANCkRURU5EO1RaSUQ9QXNpYS9TaGFuZ2hhaToyMDI2MDgyMFQxODU1MDANClNVTU1BUlk657qi5bKp54u86ZifIOWuouWcuiB2cyDmspnno4Hpu4QNCkxPQ0FUSU9OOuWcuuWcsDINCkRFU0NSSVBUSU9OOuavlOi1m++8mue6ouWyqeeLvOmYnyB2cyDmspnno4Hpu4RcbuWcuuWcsO+8muWcuuWcsDJcbuS4u+WuouWcuu+8muWuouWcug0KQkVHSU46VkFMQVJNDQpBQ1RJT046RElTUExBWQ0KREVTQ1JJUFRJT0465q+U6LWb5Y2z5bCG5byA5aeL77yM6K+35o+Q5YmN5YeG5aSHDQpUUklHR0VSOi1QVDFIDQpFTkQ6VkFMQVJNDQpFTkQ6VkVWRU5UDQpCRUdJTjpWRVZFTlQNClVJRDptYXRjaC3nuqLlsqnni7zpmJ8tMjAyNjA4MjAtNEBzY2hlZHVsZS5sb2NhbA0KRFRTVEFNUDoyMDI2MDgxN1QyMjAwMDANCkRUU1RBUlQ7VFpJRD1Bc2lhL1NoYW5naGFpOjIwMjYwODIwVDIwNDAwMA0KRFRFTkQ7VFpJRD1Bc2lhL1NoYW5naGFpOjIwMjYwODIwVDIxMzUwMA0KU1VNTUFSWTrnuqLlsqnni7zpmJ8g5a6i5Zy6IHZzIOe6ouWyqeiZjumYnw0KTE9DQVRJT0465Zy65ZywMQ0KREVTQ1JJUFRJT0465q+U6LWb77ya57qi5bKp54u86ZifIHZzIOe6ouWyqeiZjumYn1xu5Zy65Zyw77ya5Zy65ZywMVxu5Li75a6i5Zy677ya5a6i5Zy6DQpCRUdJTjpWQUxBUk0NCkFDVElPTjpESVNQTEFZDQpERVNDUklQVElPTjrmr5TotZvljbPlsIblvIDlp4vvvIzor7fmj5DliY3lh4blpIcNClRSSUdHRVI6LVBUMUgNCkVORDpWQUxBUk0NCkVORDpWRVZFTlQNCkVORDpWQ0FMRU5EQVI=" download="红岩狼队赛程.ics" class="import-btn">
+                &#x1F4C5; 导入红岩狼队比赛日历
+            </a>
+        </div>
+
+        <div class="team-section">
+            <div class="team-header">
+                <div class="team-icon icon-tiger">&#x1F42F;</div>
+                <div class="team-title">
+                    <h3>红岩虎队</h3>
+                    <span>共 5 场 · 8月18日–8月20日</span>
+                </div>
+            </div>
+
+            <div class="match-item">
+                <div class="match-time-col">
+                    <div class="match-date">8月18日</div>
+                    <div class="match-time">19:20</div>
+                </div>
+                <div class="match-detail">
+                    <div class="match-opponent">
+                        客场 <span class="vs">vs</span> 沙磁黄
+                        <span class="badge badge-away">客场</span>
+                    </div>
+                    <div class="match-meta">场地1</div>
+                </div>
+            </div>
+            <div class="match-item">
+                <div class="match-time-col">
+                    <div class="match-date">8月19日</div>
+                    <div class="match-time">18:00</div>
+                </div>
+                <div class="match-detail">
+                    <div class="match-opponent">
+                        客场 <span class="vs">vs</span> 华师黄队
+                        <span class="badge badge-away">客场</span>
+                    </div>
+                    <div class="match-meta">场地1</div>
+                </div>
+            </div>
+            <div class="match-item">
+                <div class="match-time-col">
+                    <div class="match-date">8月19日</div>
+                    <div class="match-time">20:40</div>
+                </div>
+                <div class="match-detail">
+                    <div class="match-opponent">
+                        主场 <span class="vs">vs</span> 山洞小学
+                        <span class="badge badge-home">主场</span>
+                    </div>
+                    <div class="match-meta">场地1</div>
+                </div>
+            </div>
+            <div class="match-item">
+                <div class="match-time-col">
+                    <div class="match-date">8月20日</div>
+                    <div class="match-time">18:00</div>
+                </div>
+                <div class="match-detail">
+                    <div class="match-opponent">
+                        客场 <span class="vs">vs</span> 华师绿队
+                        <span class="badge badge-away">客场</span>
+                    </div>
+                    <div class="match-meta">场地1</div>
+                </div>
+            </div>
+            <div class="match-item">
+                <div class="match-time-col">
+                    <div class="match-date">8月20日</div>
+                    <div class="match-time">20:40</div>
+                </div>
+                <div class="match-detail">
+                    <div class="match-opponent">
+                        主场 <span class="vs">vs</span> 红岩狼队
+                        <span class="badge badge-home">主场</span>
+                    </div>
+                    <div class="match-meta">场地1</div>
+                </div>
+            </div>
+
+            <a href="data:text/calendar;charset=utf-8;base64,QkVHSU46VkNBTEVOREFSDQpWRVJTSU9OOjIuMA0KUFJPRElEOi0vL+i1m+eoi+ihqC8v57qi5bKp6JmO6ZifLy9DTg0KQ0FMU0NBTEU6R1JFR09SSUFODQpNRVRIT0Q6UFVCTElTSA0KQkVHSU46VkVWRU5UDQpVSUQ6bWF0Y2gt57qi5bKp6JmO6ZifLTIwMjYwODE4LTBAc2NoZWR1bGUubG9jYWwNCkRUU1RBTVA6MjAyNjA4MTdUMjIwMDAwDQpEVFNUQVJUO1RaSUQ9QXNpYS9TaGFuZ2hhaToyMDI2MDgxOFQxOTIwMDANCkRURU5EO1RaSUQ9QXNpYS9TaGFuZ2hhaToyMDI2MDgxOFQyMDE1MDANClNVTU1BUlk657qi5bKp6JmO6ZifIOWuouWcuiB2cyDmspnno4Hpu4QNCkxPQ0FUSU9OOuWcuuWcsDENCkRFU0NSSVBUSU9OOuavlOi1m++8mue6ouWyqeiZjumYnyB2cyDmspnno4Hpu4RcbuWcuuWcsO+8muWcuuWcsDFcbuS4u+WuouWcuu+8muWuouWcug0KQkVHSU46VkFMQVJNDQpBQ1RJT046RElTUExBWQ0KREVTQ1JJUFRJT0465q+U6LWb5Y2z5bCG5byA5aeL77yM6K+35o+Q5YmN5YeG5aSHDQpUUklHR0VSOi1QVDFIDQpFTkQ6VkFMQVJNDQpFTkQ6VkVWRU5UDQpCRUdJTjpWRVZFTlQNClVJRDptYXRjaC3nuqLlsqnomY7pmJ8tMjAyNjA4MTktMUBzY2hlZHVsZS5sb2NhbA0KRFRTVEFNUDoyMDI2MDgxN1QyMjAwMDANCkRUU1RBUlQ7VFpJRD1Bc2lhL1NoYW5naGFpOjIwMjYwODE5VDE4MDAwMA0KRFRFTkQ7VFpJRD1Bc2lhL1NoYW5naGFpOjIwMjYwODE5VDE4NTUwMA0KU1VNTUFSWTrnuqLlsqnomY7pmJ8g5a6i5Zy6IHZzIOWNjuW4iOm7hOmYnw0KTE9DQVRJT0465Zy65ZywMQ0KREVTQ1JJUFRJT0465q+U6LWb77ya57qi5bKp6JmO6ZifIHZzIOWNjuW4iOm7hOmYn1xu5Zy65Zyw77ya5Zy65ZywMVxu5Li75a6i5Zy677ya5a6i5Zy6DQpCRUdJTjpWQUxBUk0NCkFDVElPTjpESVNQTEFZDQpERVNDUklQVElPTjrmr5TotZvljbPlsIblvIDlp4vvvIzor7fmj5DliY3lh4blpIcNClRSSUdHRVI6LVBUMUgNCkVORDpWQUxBUk0NCkVORDpWRVZFTlQNCkJFR0lOOlZFVkVOVA0KVUlEOm1hdGNoLee6ouWyqeiZjumYny0yMDI2MDgxOS0yQHNjaGVkdWxlLmxvY2FsDQpEVFNUQU1QOjIwMjYwODE3VDIyMDAwMA0KRFRTVEFSVDtUWklEPUFzaWEvU2hhbmdoYWk6MjAyNjA4MTlUMjA0MDAwDQpEVEVORDtUWklEPUFzaWEvU2hhbmdoYWk6MjAyNjA4MTlUMjEzNTAwDQpTVU1NQVJZOue6ouWyqeiZjumYnyDkuLvlnLogdnMg5bGx5rSe5bCP5a2mDQpMT0NBVElPTjrlnLrlnLAxDQpERVNDUklQVElPTjrmr5TotZvvvJrnuqLlsqnomY7pmJ8gdnMg5bGx5rSe5bCP5a2mXG7lnLrlnLDvvJrlnLrlnLAxXG7kuLvlrqLlnLrvvJrkuLvlnLoNCkJFR0lOOlZBTEFSTQ0KQUNUSU9OOkRJU1BMQVkNCkRFU0NSSVBUSU9OOuavlOi1m+WNs+WwhuW8gOWni++8jOivt+aPkOWJjeWHhuWkhw0KVFJJR0dFUjotUFQxSA0KRU5EOlZBTEFSTQ0KRU5EOlZFVkVOVA0KQkVHSU46VkVWRU5UDQpVSUQ6bWF0Y2gt57qi5bKp6JmO6ZifLTIwMjYwODIwLTNAc2NoZWR1bGUubG9jYWwNCkRUU1RBTVA6MjAyNjA4MTdUMjIwMDAwDQpEVFNUQVJUO1RaSUQ9QXNpYS9TaGFuZ2hhaToyMDI2MDgyMFQxODAwMDANCkRURU5EO1RaSUQ9QXNpYS9TaGFuZ2hhaToyMDI2MDgyMFQxODU1MDANClNVTU1BUlk657qi5bKp6JmO6ZifIOWuouWcuiB2cyDljY7luIjnu7/pmJ8NCkxPQ0FUSU9OOuWcuuWcsDENCkRFU0NSSVBUSU9OOuavlOi1m++8mue6ouWyqeiZjumYnyB2cyDljY7luIjnu7/pmJ9cbuWcuuWcsO+8muWcuuWcsDFcbuS4u+WuouWcuu+8muWuouWcug0KQkVHSU46VkFMQVJNDQpBQ1RJT046RElTUExBWQ0KREVTQ1JJUFRJT0465q+U6LWb5Y2z5bCG5byA5aeL77yM6K+35o+Q5YmN5YeG5aSHDQpUUklHR0VSOi1QVDFIDQpFTkQ6VkFMQVJNDQpFTkQ6VkVWRU5UDQpCRUdJTjpWRVZFTlQNClVJRDptYXRjaC3nuqLlsqnomY7pmJ8tMjAyNjA4MjAtNEBzY2hlZHVsZS5sb2NhbA0KRFRTVEFNUDoyMDI2MDgxN1QyMjAwMDANCkRUU1RBUlQ7VFpJRD1Bc2lhL1NoYW5naGFpOjIwMjYwODIwVDIwNDAwMA0KRFRFTkQ7VFpJRD1Bc2lhL1NoYW5naGFpOjIwMjYwODIwVDIxMzUwMA0KU1VNTUFSWTrnuqLlsqnomY7pmJ8g5Li75Zy6IHZzIOe6ouWyqeeLvOmYnw0KTE9DQVRJT0465Zy65ZywMQ0KREVTQ1JJUFRJT0465q+U6LWb77ya57qi5bKp6JmO6ZifIHZzIOe6ouWyqeeLvOmYn1xu5Zy65Zyw77ya5Zy65ZywMVxu5Li75a6i5Zy677ya5Li75Zy6DQpCRUdJTjpWQUxBUk0NCkFDVElPTjpESVNQTEFZDQpERVNDUklQVElPTjrmr5TotZvljbPlsIblvIDlp4vvvIzor7fmj5DliY3lh4blpIcNClRSSUdHRVI6LVBUMUgNCkVORDpWQUxBUk0NCkVORDpWRVZFTlQNCkVORDpWQ0FMRU5EQVI=" download="红岩虎队赛程.ics" class="import-btn">
+                &#x1F4C5; 导入红岩虎队比赛日历
+            </a>
+        </div>
+
+        <div class="tips">
+            <h4>&#x1F4F1; 导入方法</h4>
+            <ol>
+                <li><strong>iPhone</strong>：点击上方按钮，会直接弹出「添加全部日程」&#x2192; 点确认即可；</li>
+                <li><strong>安卓手机</strong>：点击按钮后会下载 .ics 文件，下拉通知栏点开该文件（或在「下载」里点开），选择用 <span class="highlight">系统日历</span> 打开即可批量导入；</li>
+                <li><strong>微信内</strong>：若点不动，请点右上角「&#x22EF;」&#x2192; 选择 <span class="highlight">在浏览器打开</span>，再点按钮。</li>
+            </ol>
+            <p style="margin-top: 12px; font-size: 13px; color: #8e8e93;">
+                &#x23F0; 提醒：每场比赛已自带开赛前 <strong>1 小时</strong> 闹钟提醒。
+            </p>
+        </div>
+
+        <div class="footer">
+            红岩狼队 &#xB7; 红岩虎队 &#xB7; 赛程日历
+        </div>
+    </div>
+</body>
+</html>
